@@ -590,7 +590,7 @@ function removesilenceSimple(inputPath, outputPath) {
                     // Build keep segments with padding at silence start
                     let keepSegments = [];
                     let lastEnd = 0;
-                    const padding = 0.25;
+                    const padding = 0.30;
                     
                     silencePeriods.forEach((silence, index) => {
                         if (silence.start > lastEnd) {
@@ -600,7 +600,7 @@ function removesilenceSimple(inputPath, outputPath) {
                         
                         // For the last silence period, keep 0.3 seconds from its start
                         if (index === silencePeriods.length - 1) {
-                            const paddingEnd = silence.start + 0.5;
+                            const paddingEnd = silence.start + 0.7;
                             keepSegments.push(`between(t,${silence.start},${paddingEnd})`);
                             return; // Don't update lastEnd for the last silence
                         }
