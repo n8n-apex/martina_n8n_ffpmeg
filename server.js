@@ -559,7 +559,7 @@ function removesilenceSimple(inputPath, outputPath) {
             videoDuration = metadata.format.duration;
             
             ffmpeg(inputPath)
-                .audioFilters('silencedetect=noise=-25dB:duration=0.5')
+                .audioFilters('silencedetect=noise=-25dB:duration=0.70')
                 .format('null')
                 .output('-')
                 .on('stderr', (line) => {
@@ -600,7 +600,7 @@ function removesilenceSimple(inputPath, outputPath) {
                         
                         // For the last silence period, keep 0.3 seconds from its start
                         if (index === silencePeriods.length - 1) {
-                            const paddingEnd = silence.start + 0.7;
+                            const paddingEnd = silence.start + 0.3;
                             keepSegments.push(`between(t,${silence.start},${paddingEnd})`);
                             return; // Don't update lastEnd for the last silence
                         }
